@@ -1,6 +1,8 @@
 .color{
   border: 1px solid black;
   display: inline-block;
+  height: 60px;
+  width: 60px;
 }
 #black{
   background-color: black;
