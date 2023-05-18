@@ -16,3 +16,13 @@
 #yellow{
   background-color: yellow;
 }
+#color-palette{
+  margin-bottom: 30px;
+}
+#pixel-board{
+  border: 1px solid black;
+  width: 210px;
+  height: 225px;
+  margin-top: 50px;
+  position: 'absolute';
+}

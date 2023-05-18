@@ -3,6 +3,8 @@ const body = document.getElementsByTagName('body')
 const cor1 = document.getElementById('blue')
 const cor2 = document.getElementById('red')
 const cor3 = document.getElementById('yellow')
+const quadro = document.getElementById('pixel-board')
+
 const criarCor = () => {
   let r = Math.random() * 255;
   let g = Math.random() * 255;
@@ -27,6 +29,7 @@ const gerarCores = () => {
   }
   )
 }
+// Local Storage
 const atualizarCor = () => {
   const recarregarCor = JSON.parse(localStorage.getItem('colorPalette'));
   if (recarregarCor === null) {
@@ -45,7 +48,23 @@ const atualizarCor = () => {
   }
 }
 }
+//Criar tabela
+const criarTabela = () =>{
+  for (index =1; index <= 25; index +=1){
+    let pixels = document.createElement('div')
+    pixels.className = 'pixel'
+    pixels.style.backgroundColor = 'white'
+    pixels.style.width = '40px'
+    pixels.style.height = '40px'
+    pixels.style.border = '1px solid black'
+    pixels.style.display = 'inline-block'
+    pixels.style.position = 'relative'
+    quadro.appendChild(pixels)
+  }
+}
+
 window.onload = () => {
+  criarTabela();
   gerarCores();
   atualizarCor();
   console.log(paletaCores);
