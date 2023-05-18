@@ -3,7 +3,8 @@ const body = document.getElementsByTagName('body')
 const cor1 = document.getElementById('blue')
 const cor2 = document.getElementById('red')
 const cor3 = document.getElementById('yellow')
-const quadro = document.getElementById('pixel-board')
+const quadro = document.getElementById('pixel-board');
+const black = document.getElementById('black');
 
 const criarCor = () => {
   let r = Math.random() * 255;
@@ -33,26 +34,26 @@ const gerarCores = () => {
 const atualizarCor = () => {
   const recarregarCor = JSON.parse(localStorage.getItem('colorPalette'));
   if (recarregarCor === null) {
-   for(index =1; index < paletaCores.length; index +=1){
-    if (paletaCores[index] === cor1){
-      paletaCores[index].style.backgroundColor = 'blue'
-    }else if (paletaCores[index]  === cor2){
-      paletaCores[index].style.backgroundColor = 'red'
-    }else if (paletaCores[index] === cor3){
-      paletaCores[index].style.backgroundColor = 'yellow'
+    for (index = 1; index < paletaCores.length; index += 1) {
+      if (paletaCores[index] === cor1) {
+        paletaCores[index].style.backgroundColor = 'blue'
+      } else if (paletaCores[index] === cor2) {
+        paletaCores[index].style.backgroundColor = 'red'
+      } else if (paletaCores[index] === cor3) {
+        paletaCores[index].style.backgroundColor = 'yellow'
+      }
     }
+  } else {
+    for (index = 1; index < paletaCores.length; index += 1) {
+      paletaCores[index].style.backgroundColor = recarregarCor[index - 1]
     }
-  }else{
-  for (index = 1; index < paletaCores.length; index += 1) {
-    paletaCores[index].style.backgroundColor = recarregarCor[index-1]
   }
 }
-}
-//Criar tabela
-const criarTabela = () =>{
-  for (index =1; index <= 25; index +=1){
+//Criar tabela e customizar
+const criarTabela = () => {
+  for (index = 1; index <= 25; index += 1) {
     let pixels = document.createElement('div')
-    pixels.className = 'pixel'
+    pixels.classList.add('pixel');
     pixels.style.backgroundColor = 'white'
     pixels.style.width = '40px'
     pixels.style.height = '40px'
@@ -62,10 +63,35 @@ const criarTabela = () =>{
     quadro.appendChild(pixels)
   }
 }
+//Selecionar cor 
+const selected = () => {
+  black.classList.add('selected')
+}
+// const selecionarClasse = () => {
+//   const corSelecionada = document.querySelector('.selected');
+//   corSelecionada.classList.remove('selected');
+//   event.target.classList.add('selected')
+// }
+const selecionarCor = () => {
+  for (index =0; index < paletaCores.length;index +=1) {
+    paletaCores[index].addEventListener('click', () => {
+      const corSelecionada = document.querySelector('.selected');
+      corSelecionada.classList.remove('selected');
+      event.target.classList.add('selected')
+    }
+    )
+  }
+}
 
+// black.addEventListener('click',selecionarClasse)
+// cor1.addEventListener('click',selecionarClasse)
+// cor2.addEventListener('click',selecionarClasse)
+// cor3.addEventListener('click',selecionarClasse)
 window.onload = () => {
   criarTabela();
   gerarCores();
   atualizarCor();
+  selected();
+  selecionarCor();
   console.log(paletaCores);
 }
