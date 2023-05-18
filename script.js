@@ -63,7 +63,7 @@ const criarTabela = () => {
     quadro.appendChild(pixels)
   }
 }
-//Selecionar cor 
+//Selecionar classe
 const selected = () => {
   black.classList.add('selected')
 }
@@ -72,17 +72,16 @@ const selected = () => {
 //   corSelecionada.classList.remove('selected');
 //   event.target.classList.add('selected')
 // }
-const selecionarCor = () => {
-  for (index =0; index < paletaCores.length;index +=1) {
-    paletaCores[index].addEventListener('click', () => {
-      const corSelecionada = document.querySelector('.selected');
-      corSelecionada.classList.remove('selected');
-      event.target.classList.add('selected')
-    }
-    )
-  }
+//Selecionar cor
+const selecionarCores = () => {
+  const corSelecionada = document.querySelector('.selected');
+  corSelecionada.classList.remove('selected');
+  event.target.classList.add('selected')
 }
-
+const selecionarCor = () => {
+  for(index = 0; index<paletaCores.length; index +=1) {
+  paletaCores[index].addEventListener('click', selecionarCores)}
+}
 // black.addEventListener('click',selecionarClasse)
 // cor1.addEventListener('click',selecionarClasse)
 // cor2.addEventListener('click',selecionarClasse)
