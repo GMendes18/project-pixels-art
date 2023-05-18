@@ -1,23 +1,52 @@
 const paletaCores = document.querySelectorAll('.color');
-const black = document.getElementById('black');
-const mudarCor = () => {
+const body = document.getElementsByTagName('body')
+const cor1 = document.getElementById('blue')
+const cor2 = document.getElementById('red')
+const cor3 = document.getElementById('yellow')
+const criarCor = () => {
   let r = Math.random() * 255;
   let g = Math.random() * 255;
   let b = Math.random() * 255;
   return `rgb(${r},${g},${b})`
 }
+//Botão cores aleatórias
 const gerarCores = () => {
-  document.getElementById('button-random-color').addEventListener('click', () => {
-    for (index = 0; index < paletaCores.length; index += 1) {
-      if (paletaCores[index] === black){
-        paletaCores[index].style.backgroundColor = black;
-      }else{
-      paletaCores[index].style.backgroundColor = mudarCor();
+  let botaoRandom = document.getElementById('button-random-color')
+  let arrayCores = [];
+  botaoRandom.addEventListener('click', () => {
+    const black = document.getElementById('black');
+    for (index = 1; index < paletaCores.length; index += 1) {
+      if (paletaCores[index] === black) {
+        paletaCores[index].style.backgroundColor = 'black';
+      } else {
+        paletaCores[index].style.backgroundColor = criarCor();
+        arrayCores[index - 1] = paletaCores[index].style.backgroundColor
+        localStorage.setItem('colorPalette', JSON.stringify(arrayCores));
+      }
     }
   }
-}
   )
 }
-gerarCores();
-mudarCor();
-console.log(paletaCores);
+const atualizarCor = () => {
+  const recarregarCor = JSON.parse(localStorage.getItem('colorPalette'));
+  if (recarregarCor === null) {
+   for(index =1; index < paletaCores.length; index +=1){
+    if (paletaCores[index] === cor1){
+      paletaCores[index].style.backgroundColor = 'blue'
+    }else if (paletaCores[index]  === cor2){
+      paletaCores[index].style.backgroundColor = 'red'
+    }else if (paletaCores[index] === cor3){
+      paletaCores[index].style.backgroundColor = 'yellow'
+    }
+    }
+  }else{
+  for (index = 1; index < paletaCores.length; index += 1) {
+    paletaCores[index].style.backgroundColor = recarregarCor[index-1]
+  }
+}
+}
+window.onload = () => {
+  gerarCores();
+  atualizarCor();
+  console.log(paletaCores);
+}
