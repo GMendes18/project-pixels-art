@@ -4,7 +4,6 @@ const cor1 = document.getElementById('blue')
 const cor2 = document.getElementById('red')
 const cor3 = document.getElementById('yellow')
 const quadro = document.getElementById('pixel-board');
-const black = document.getElementById('black');
 
 const criarCor = () => {
   let r = Math.random() * 255;
@@ -34,13 +33,15 @@ const gerarCores = () => {
 const atualizarCor = () => {
   const recarregarCor = JSON.parse(localStorage.getItem('colorPalette'));
   if (recarregarCor === null) {
-    for (index = 1; index < paletaCores.length; index += 1) {
+    for (index = 0; index < paletaCores.length; index += 1) {
       if (paletaCores[index] === cor1) {
         paletaCores[index].style.backgroundColor = 'blue'
       } else if (paletaCores[index] === cor2) {
         paletaCores[index].style.backgroundColor = 'red'
       } else if (paletaCores[index] === cor3) {
         paletaCores[index].style.backgroundColor = 'yellow'
+      } else if (paletaCores[index] === black) {
+        paletaCores[index].style.backgroundColor = 'black'
       }
     }
   } else {
@@ -60,37 +61,64 @@ const criarTabela = () => {
     pixels.style.border = '1px solid black'
     pixels.style.display = 'inline-block'
     pixels.style.position = 'relative'
+    pixels.style.marginTop = '-2px'
+    pixels.style.marginBottom = '-2px'
     quadro.appendChild(pixels)
   }
 }
 //Selecionar classe
-const selected = () => {
-  black.classList.add('selected')
-}
+// const selectedDefault = () => {
+//   black.classList.add('selected')
+// }
 // const selecionarClasse = () => {
 //   const corSelecionada = document.querySelector('.selected');
 //   corSelecionada.classList.remove('selected');
 //   event.target.classList.add('selected')
 // }
 //Selecionar cor
-const selecionarCores = () => {
-  const corSelecionada = document.querySelector('.selected');
-  corSelecionada.classList.remove('selected');
-  event.target.classList.add('selected')
-}
+// const selecionarCores = () => {
+//   const corSelecionada = document.querySelector('.selected');
+//   corSelecionada.classList.remove('selected');
+//   event.target.classList.add('selected')
+// }
 const selecionarCor = () => {
-  for(index = 0; index<paletaCores.length; index +=1) {
-  paletaCores[index].addEventListener('click', selecionarCores)}
+  paletaCores[0].classList.add('selected')
+  for (index = 0; index < paletaCores.length; index += 1) {
+    paletaCores[index].addEventListener('click', () => {
+      const corSelecionada = document.querySelector('.selected');
+      corSelecionada.classList.remove('selected');
+      event.target.classList.add('selected')
+    }
+    )
+  }
 }
-// black.addEventListener('click',selecionarClasse)
-// cor1.addEventListener('click',selecionarClasse)
-// cor2.addEventListener('click',selecionarClasse)
-// cor3.addEventListener('click',selecionarClasse)
-window.onload = () => {
-  criarTabela();
-  gerarCores();
-  atualizarCor();
-  selected();
-  selecionarCor();
-  console.log(paletaCores);
-}
+  // black.addEventListener('click',selecionarClasse)
+  // cor1.addEventListener('click',selecionarClasse)
+  // cor2.addEventListener('click',selecionarClasse)
+  // cor3.addEventListener('click',selecionarClasse)
+
+  //Preencher pixel
+  const corPixel = () => {
+    const classePixels = document.querySelectorAll('.pixel')
+    for (index = 0; index < classePixels.length; index += 1) {
+      const selecionarClasseSelected = document.querySelector('.selected')
+      classePixels[index].addEventListener('click', () => {
+        for (index = 0; index < classePixels.length; index += 1) {
+          const selecionarClasseSelected = document.querySelector('.selected');
+          event.target.style.backgroundColor = selecionarClasseSelected.style.backgroundColor
+        }
+      }
+      )
+    }
+  }
+
+
+  window.onload = () => {
+    criarTabela();
+    gerarCores();
+    atualizarCor();
+    // selectedDefault();
+    selecionarCor();
+    corPixel();
+    console.log(paletaCores);
+  }
