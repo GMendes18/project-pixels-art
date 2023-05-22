@@ -14,6 +14,7 @@ const criarCor = () => {
 //Botão cores aleatórias
 const gerarCores = () => {
   let botaoRandom = document.getElementById('button-random-color')
+  botaoRandom.style.padding = '20px 30px'
   let arrayCores = [];
   botaoRandom.addEventListener('click', () => {
     const black = document.getElementById('black');
@@ -70,11 +71,6 @@ const criarTabela = () => {
 // const selectedDefault = () => {
 //   black.classList.add('selected')
 // }
-// const selecionarClasse = () => {
-//   const corSelecionada = document.querySelector('.selected');
-//   corSelecionada.classList.remove('selected');
-//   event.target.classList.add('selected')
-// }
 //Selecionar cor
 // const selecionarCores = () => {
 //   const corSelecionada = document.querySelector('.selected');
@@ -92,33 +88,50 @@ const selecionarCor = () => {
     )
   }
 }
-  // black.addEventListener('click',selecionarClasse)
-  // cor1.addEventListener('click',selecionarClasse)
-  // cor2.addEventListener('click',selecionarClasse)
-  // cor3.addEventListener('click',selecionarClasse)
+// black.addEventListener('click',selecionarClasse)
+// cor1.addEventListener('click',selecionarClasse)
+// cor2.addEventListener('click',selecionarClasse)
+// cor3.addEventListener('click',selecionarClasse)
 
-  //Preencher pixel
-  const corPixel = () => {
-    const classePixels = document.querySelectorAll('.pixel')
-    for (index = 0; index < classePixels.length; index += 1) {
-      const selecionarClasseSelected = document.querySelector('.selected')
-      classePixels[index].addEventListener('click', () => {
-        for (index = 0; index < classePixels.length; index += 1) {
-          const selecionarClasseSelected = document.querySelector('.selected');
-          event.target.style.backgroundColor = selecionarClasseSelected.style.backgroundColor
-        }
+//Preencher pixel
+const corPixel = () => {
+  const classePixels = document.querySelectorAll('.pixel')
+  for (index = 0; index < classePixels.length; index += 1) {
+    classePixels[index].addEventListener('click', () => {
+      for (index = 0; index < classePixels.length; index += 1) {
+        const selecionarClasseSelected = document.querySelector('.selected');
+        event.target.style.backgroundColor = selecionarClasseSelected.style.backgroundColor
       }
-      )
+    }
+    )
+  }
+}
+
+//Botão reset
+const botaoReset = () => {
+  const resetButton = document.getElementById('clear-board')
+  resetButton.innerText = 'Limpar'
+  resetButton.id = 'clear-board'
+  resetButton.style.border = '1px solid black'
+  // resetButton.style.marginTop = '30px'
+  resetButton.style.padding = '20px 30px'
+  resetButton.style.marginLeft = '50px'
+  resetButton.addEventListener('click',()=>{
+    const classePixels = document.querySelectorAll('.pixel')
+    for(index =0;index< classePixels.length;index +=1){
+      classePixels[index].style.backgroundColor = 'white'
     }
   }
+  )
+}
 
-
-  window.onload = () => {
-    criarTabela();
-    gerarCores();
-    atualizarCor();
-    // selectedDefault();
-    selecionarCor();
-    corPixel();
-    console.log(paletaCores);
-  }
+window.onload = () => {
+  criarTabela();
+  gerarCores();
+  atualizarCor();
+  // selectedDefault();
+  selecionarCor();
+  corPixel();
+  botaoReset();
+  console.log(paletaCores);
+}
