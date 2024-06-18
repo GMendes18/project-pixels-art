@@ -116,9 +116,9 @@ const botaoReset = () => {
   // resetButton.style.marginTop = '30px'
   resetButton.style.padding = '20px 30px'
   resetButton.style.marginLeft = '50px'
-  resetButton.addEventListener('click',()=>{
+  resetButton.addEventListener('click', () => {
     const classePixels = document.querySelectorAll('.pixel')
-    for(index =0;index< classePixels.length;index +=1){
+    for (let index = 0; index < classePixels.length; index += 1) {
       classePixels[index].style.backgroundColor = 'white'
     }
   }
